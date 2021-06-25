@@ -240,6 +240,9 @@ def interactive_replace(plain_output: bool) -> int: # pylint: disable=unused-arg
 	parser.add_argument("targets", metavar="TARGET", nargs="+", help="a file or directory on which to perform the search and replace")
 	args = parser.parse_args()
 
+	print("debugging line 1")
+	print(args)
+
 	# By default, the esc key has a delay before its delivered to curses.
 	# Set the delay to 0
 	os.environ.setdefault("ESCDELAY", "0")
@@ -271,14 +274,18 @@ def interactive_replace(plain_output: bool) -> int: # pylint: disable=unused-arg
 		regex_flags = regex_flags | regex.DOTALL
 
 	try:
+		print("debugging line 2")
 		# Initialize curses
 		screen = curses.initscr()
 		curses.start_color()
 		if curses.has_colors():
 			curses.init_pair(1, curses.COLOR_WHITE, curses.COLOR_BLUE)
+		print("debugging line 3")
 
 		# Disable the blinking cursor
 		curses.curs_set(False)
+
+		print("debugging line 4")
 
 		for filepath in se.get_target_filenames(args.targets, ".xhtml"):
 			try:
